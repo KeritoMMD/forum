@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórum - Login</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+    <script src="//use.fontawesome.com/f86c38a22d.js"></script>
+
+
+</head>
+
+<body>
+    <!-- Navbar-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand h1 mb-0" href="#">Fórum</a>
+        </div>
+    </nav>
+
+
+    <!-- Form-->
+    <div class="container mt-5" id="login">
+
+        <div class="row mt-5"></div>
+
+
+        <div class="row mt-5">
+            <div class="col-3"></div>
+
+            <div class="col-6">
+                <h1 class="display-5"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h1>
+                <hr>
+            </div>
+
+        </div>
+
+
+        <div class="row justify-content-center mb-5">
+            <div class="col">
+                <form name="form" action="/home/login" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-sm-3"></div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="inputUsuario">Usuário</label>
+                            <input type="text" placeholder="Digite seu usuário" class="form-control" id="inputUsuario"
+                                name="inputUsuario" value="<%= login.inputUsuario %>">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-sm-3"></div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="inputSenha">Senha</label>
+                            <input type="password" placeholder="Digite sua senha" class="form-control" id="inputSenha"
+                                name="inputSenha" value="<%= login.inputSenha %>">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-3"></div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary">Acessar</button>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-3"></div>
+                        <div class="col-sm-3 mt-2">
+                            <a>Primeiro acesso</a>
+                        </div>
+                        
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-3"></div>
+                        <section>
+                            <% if(erros) { %>
+                            <ul>
+                                <% for(let i = 0; i < erros.length; i++) { %>
+                                <li>
+                                    <%= erros[i].msg %>
+                                </li>
+                                <% } %>
+                            </ul>
+                            <% } %>
+
+                        </section>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    
+
+
+
+</body>
+
+</html>
