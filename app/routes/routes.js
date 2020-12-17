@@ -4,10 +4,13 @@ const controllerLogin = require("../controllers/loginController");
 const controllerTopico = require("../controllers/topicoController");
 const controllerMensagens = require("../controllers/mensagensController");
 const controllerUsuario = require("../controllers/usuarioController");
+const controllerCurso = require("../controllers/cursoController");
 
 
 
 module.exports = {
+
+    //Login
     rotaLogin: function(app){
         app.get("/", function(req, res){
             res.render("login", {login: {}, erros: {} });
@@ -15,7 +18,7 @@ module.exports = {
     },
 
     rotaLoginAcessar: function(app){
-        app.post("/home/login", [
+        app.post("/cursos/login", [
             check("inputUsuario").isLength({min: 1}).withMessage("Usuário é obrigatório"),
             check("inputSenha").isLength({min: 1}).withMessage("Senha é obrigatória"),
         ], function(req, res){
@@ -27,19 +30,29 @@ module.exports = {
     },
 
     rotaHome: function(app){
-        app.get("/home", function(req, res){
-            res.render("home");
+        app.get("/cursos", function(req, res){
+            res.render("cursos");
         });
     },
 
     
 
-    rotaTopico: function(app){
-        app.get("/topico", function(req, res){
+    //Tópicos
+    rotaTopicos: function(app){
+        app.get("/topicos", function(req, res){
             controllerTopico.loadTopicos(app, req, res);
         });
     },
 
+    rotaInsereTopico: function(app){
+        app.get("/insereTopico", function(req, res){
+            res.render("admin/insereTopico",  {topico: {}, erros: {} });
+        });
+    },
+
+
+
+    //Mensagens
     rotaMensagens: function(app){
         app.get("/mensagens", function(req, res){
             controllerMensagens.loadMensagens(app, req, res);
@@ -47,6 +60,8 @@ module.exports = {
     },
 
 
+
+    //Usuários
     rotaInsereUsuario: function(app){
         app.get("/insereUsuario", function(req, res){
             res.render("admin/insereUsuario", {usuario: {}, erros: {} });
@@ -71,6 +86,42 @@ module.exports = {
     rotaAlteraUsuario: function(app){
         app.get("/alteraUsuario", function(req, res){
             res.render("admin/alteraUsuario", {usuario: {}, erros: {} });
+        });
+    },
+
+
+
+
+    //Cursos
+    rotaInsereCurso: function(app){
+        app.get("/insereCurso", function(req, res){
+            res.render("admin/insereCurso", {curso: {}, erros: {} });
+        });
+    },
+
+
+    rotaSalvarCurso: function(app){
+        app.post("/curso/salvar", [
+            check("inputCurso").isLength({min: 1}).withMessage("Nome do curso é obrigatório"),
+        
+        ], function(req, res){
+            const errors = validationResult(req);
+            controllerCurso.cursoSalvar(app, req, res, errors)
+
+        });
+
+    },
+
+    rotaAlteraCurso: function(app){
+        app.get("/alteraCurso", function(req, res){
+            res.render("admin/alteraCurso", {curso: {}, erros: {} });
+        });
+    },
+
+
+    rotaInsereAlunoCurso: function(app){
+        app.get("/insereAlunoCurso", function(req, res){
+            res.render("admin/insereAlunoCurso", {curso: {}, erros: {} });
         });
     },
 

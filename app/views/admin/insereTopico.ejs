@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fórum - Mensagens</title>
+    <title>Fórum - Insere Topico</title>
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -72,45 +72,69 @@
             <div class="col-1"></div>
 
             <div class="col-10">
-                <h3 class="display-5"><i class="fa fa-comments-o" aria-hidden="true"></i> Título do Fórum</h3>
+                <h3 class="display-5"> <i class="fa fa-commenting-o" aria-hidden="true"></i> Novo Tópico</h3>
                 <hr>
 
-                <div class="card bg-light">
-                    <h5 class="card-header">Professor</h5>
-                    <div class="card-body">
-                        <p class="card-text">Descrição do tema a ser discutido</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
-                    </div>
-                </div>
-                <br>
+                <div class="row justify-content-center mb-5">
+                    <div class="col">
+                        <form name="form" action="" method="post">
+                            <div class="form-row">
+        
+                                <div class="form-group col-sm-12">
+                                    <label for="inputTopico">Título do tópico:</label>
+                                    <input type="text" placeholder="Digite o título do tópico" class="form-control" id="inputTopico"
+                                        name="inputTopico" value="<%= topico.inputTopico %>">
+                                </div>
 
-                <div class="card text-right">
-                    <h5 class="card-header">Aluno A</h5>
-                    <div class="card-body">
-                        <p class="card-text">Resposta do aluno A.</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
-                    </div>
-                </div>
-                <br>
+                            
+                            </div>
 
-                <div class="card">
-                    <h5 class="card-header">Eu</h5>
-                    <div class="card-body">
-                        <p class="card-text">Minha resposta.</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
-                        <a href="#" class="btn btn-danger">Excluir</a>
-                    </div>
-                </div>
-                <br>
 
-                <div class="card text-right">
-                    <h5 class="card-header">Aluno B</h5>
-                    <div class="card-body">
-                        <p class="card-text">Resposta do aluno B.</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="inputDescricao">Descrição</label>
+                                    <textarea class="form-control" id="inputDescricao" name="inputDescricao" rows="5" placeholder="Escreva sua mensagem..."></textarea>
+
+                                </div>
+                            </div>
+                            
+        
+                            <div class="form-row">
+                                <div class="form-group"></div>
+                                <div class="col-sm-3">
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+        
+                            </div>  
+                            <br>
+        
+                            <div class="form-row">
+                                <div class="form-group col-sm-1"></div>
+                                <section>
+                                    <% if(erros) { %>
+                                    <ul>
+                                        <% for(let i = 0; i < erros.length; i++) { %>
+                                        <li>
+                                            <%= erros[i].msg %>
+                                        </li>
+                                        <% } %>
+                                    </ul>
+                                    <% } %>
+        
+                                </section>
+                            </div>
+        
+        
+                        </form>
                     </div>
                 </div>
-                <br>
+                
+                
+
+                
+
+
+                
 
             </div>
 
@@ -118,32 +142,13 @@
 
         </div>
 
-        <div class="row mt-5">
-            <div class="col-1"></div>
-
-            <div class="col-10">
-                <h5 class="display-5"><i class="fa fa-commenting-o" aria-hidden="true"></i> Escreva sua mensagem</h5>
-                <hr>
-
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control" id="mensagem" name="mensagem" rows="3" placeholder="Escreva sua mensagem..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-
-                </form>
-            </div>
-        </div>
-
-
-
+        
 
     </div>
 
 
 
-    <footer class="footer navbar-fixed-bottom text-light navbar-dark bg-primary">
+    <footer class="footer fixed-bottom text-light navbar-dark bg-primary">
         <div class="container mt-3">
             <div class="row">
                 <div class="col-sm-8">

@@ -15,7 +15,8 @@ module.exports.logar = function (app, req, res, errors) {
     loginModel.logar(connection, function (err, results){
         if(!err)
         {
-            res.render("home", {login: results});
+            res.render("cursos", {login: results});
+            
         }
         else
         {
