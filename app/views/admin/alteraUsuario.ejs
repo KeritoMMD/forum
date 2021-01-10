@@ -28,7 +28,21 @@
     <!-- Navbar-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand h1 mb-0" href="#">Fórum</a>
+            <a class="navbar-brand h1 mb-0" href="/home?idUsuario=<%= usuario[0].idUsuario %>">Fórum</a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <a class="nav-link" href="/alteraUsuario?idUsuario=<%= usuario[0].idUsuario %>">Perfil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/">Sair</a>
+                    </li>
+
+                </ul>
+            </div>
+
+
         </div>
     </nav>
 
@@ -45,6 +59,7 @@
             <div class="col-10">
                 <h1 class="display-5"><i class="fa fa-user" aria-hidden="true"></i> Alterar Usuário</h1>
                 <hr>
+
             </div>
 
         </div>
@@ -52,21 +67,26 @@
 
         <div class="row justify-content-center mb-5">
             <div class="col">
-                <form name="form" action="" method="post">
+                <form name="form" action="/usuario/alterar" method="post">
                     <div class="form-row">
                         <div class="form-group col-sm-1"></div>
 
-                        <div class="form-group col-sm-7">
-                            <label for="inputNome">Nome Completo</label>
+                        <div class="form-group col-sm-1">
+                            <label for="idUsuario">ID</label>
+                            <input type="text" class="form-control"
+                                id="idUsuario" name="idUsuario" readonly value="<%= usuario[0].idUsuario %>">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+                            <label for="nome">Nome Completo</label>
                             <input type="text" placeholder="Digite seu nome completo" class="form-control"
-                                id="inputNome" name="inputNome" value="<%= usuario.inputNome %>">
+                                id="nome" name="nome" value="<%= usuario[0].nome %>">
                         </div>
 
                         <div class="form-group col-sm-3">
-                            <label for="inputProntuario">Prontuário</label>
+                            <label for="prontuario">Prontuário</label>
                             <input type="text" placeholder="Digite seu prontuário" class="form-control"
-                                id="inputProntuario" name="inputProntuario" value="<%= usuario.inputProntuario %>"
-                                value="Kevin Seiji Shimoda">
+                                id="prontuario" name="prontuario" value="<%= usuario[0].prontuario %>">
                         </div>
 
                     </div>
@@ -74,8 +94,8 @@
                         <div class="form-group col-sm-1"></div>
 
                         <div class="form-group col-sm-5">
-                            <label for="selectTipo">Tipo de Usuário</label>
-                            <select class="form-control" id="selectTipo" name="selectTipo">
+                            <label for="tipo">Tipo de Usuário</label>
+                            <select class="form-control" id="tipo" name="tipo" value="<%= usuario[0].tipo %>">
                                 <option>Aluno</option>
                                 <option>Professor</option>
 
@@ -84,9 +104,9 @@
 
 
                         <div class="form-group col-sm-5">
-                            <label for="inputSenha">Senha</label>
-                            <input type="password" placeholder="Digite sua senha" class="form-control" id="inputSenha"
-                                name="inputSenha" value="<%= usuario.inputSenha %>">
+                            <label for="senha">Senha</label>
+                            <input type="password" placeholder="Digite sua senha" class="form-control" id="senha"
+                                name="senha" value="<%= usuario[0].senha %>">
                         </div>
 
 

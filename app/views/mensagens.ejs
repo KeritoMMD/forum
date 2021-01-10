@@ -29,15 +29,15 @@
     <!-- Navbar-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand h1 mb-0" href="#">Fórum</a>
+            <a class="navbar-brand h1 mb-0" href="/home?idUsuario=<%= usuario[0].idUsuario %>">Fórum</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li>
-                        <a class="nav-link" href="#">Perfil</a>
+                        <a class="nav-link" href="/alteraUsuario?idUsuario=<%= usuario[0].idUsuario %>">Perfil</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">Sair</a>
+                        <a class="nav-link" href="/">Sair</a>
                     </li>
 
                 </ul>
@@ -52,13 +52,8 @@
         <div class="row mt-5"></div>
         <div class="row mt-5">
 
-            <div class="col-2">
-                <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true">
-                        Voltar</i></button>
-            </div>
-
-            <div class="col-8 d-flex justify-content-center">
-                <h3 class="display-5"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Matemática</h3>
+            <div class="col-12 d-flex justify-content-center">
+                <h3 class="display-5"><i class="fa fa-graduation-cap" aria-hidden="true"></i> <%= cursos[0].nome %></h3>
 
             </div>
         </div>
@@ -72,45 +67,49 @@
             <div class="col-1"></div>
 
             <div class="col-10">
-                <h3 class="display-5"><i class="fa fa-comments-o" aria-hidden="true"></i> Título do Fórum</h3>
+                <h3 class="display-5"><i class="fa fa-comments-o" aria-hidden="true"></i> <%= topicos[0].titulo %></h3>
                 <hr>
 
                 <div class="card bg-light">
-                    <h5 class="card-header">Professor</h5>
                     <div class="card-body">
-                        <p class="card-text">Descrição do tema a ser discutido</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
+                        <pre class="card-text"><%= topicos[0].descricao %></pre>
+                        <p class="card-text"><small class="text-muted"><%= topicos[0].dataCriacao %></small></p>
                     </div>
                 </div>
                 <br>
 
-                <div class="card text-right">
-                    <h5 class="card-header">Aluno A</h5>
-                    <div class="card-body">
-                        <p class="card-text">Resposta do aluno A.</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
-                    </div>
-                </div>
-                <br>
+                <% for(let i = 0; i<mensagens.length; i++) { %>
 
-                <div class="card">
-                    <h5 class="card-header">Eu</h5>
-                    <div class="card-body">
-                        <p class="card-text">Minha resposta.</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
-                        <a href="#" class="btn btn-danger">Excluir</a>
-                    </div>
-                </div>
-                <br>
+                    <% if(usuario[0].idUsuario != mensagens[i].idUsuario) { %>
 
-                <div class="card text-right">
-                    <h5 class="card-header">Aluno B</h5>
-                    <div class="card-body">
-                        <p class="card-text">Resposta do aluno B.</p>
-                        <p class="card-text"><small class="text-muted">20/10/2020</small></p>
-                    </div>
-                </div>
-                <br>
+                        <div class="card text-right">
+                            <h5 class="card-header"><%= mensagens[i].nome %></h5>
+                            <div class="card-body">
+                                <p class="card-text"><%= mensagens[i].conteudo %></p>
+                                <p class="card-text"><small class="text-muted"><%= mensagens[i].dataCriacaom %></small></p>
+                            </div>
+                        </div>
+                        <br>
+
+                    <% } %>
+
+                    <% if(usuario[0].idUsuario == mensagens[i].idUsuario) { %>
+
+                        <div class="card">
+                            <h5 class="card-header">Eu</h5>
+                            <div class="card-body">
+                                <p class="card-text"><%= mensagens[i].conteudo %></p>
+                                <p class="card-text"><small class="text-muted"><%= mensagens[i].dataCriacaom %></small></p>
+                                <a href="/mensagem/excluir?idUsuario=<%= usuario[0].idUsuario %>&idTopico=<%= topicos[0].idTopico %>&idMensagem= <%= mensagens[i].idMensagem %> " class="btn btn-danger">Excluir</a>
+                            </div>
+                        </div>
+                        <br>
+
+                    <% } %>
+
+
+                <% } %>
+
 
             </div>
 
@@ -125,15 +124,35 @@
                 <h5 class="display-5"><i class="fa fa-commenting-o" aria-hidden="true"></i> Escreva sua mensagem</h5>
                 <hr>
 
-                <form>
+                <form name="form" action="/mensagem/salvar?idUsuario=<%= usuario[0].idUsuario %>&idTopico=<%= topicos[0].idTopico %>" method="post">
                     <div class="form-group">
-                        <textarea class="form-control" id="mensagem" name="mensagem" rows="3" placeholder="Escreva sua mensagem..."></textarea>
+                        <textarea class="form-control" id="conteudo" name="conteudo" rows="3" placeholder="Escreva sua mensagem..."><%= mensagem.descricao %></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Enviar</button>
 
+                    <div class="form-row">
+                        <div class="form-group col-sm-1"></div>
+                        <section>
+                            <% if(erros) { %>
+                            <ul>
+                                <% for(let i = 0; i < erros.length; i++) { %>
+                                <li>
+                                    <%= erros[i].msg %>
+                                </li>
+                                <% } %>
+                            </ul>
+                            <% } %>
+        
+                        </section>
+                    </div>
                 </form>
+
+                
             </div>
+            
+
+            
         </div>
 
 

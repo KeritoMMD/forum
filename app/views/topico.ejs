@@ -30,15 +30,15 @@
     <!-- Navbar-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand h1 mb-0" href="#">Fórum</a>
+            <a class="navbar-brand h1 mb-0" href="/home?idUsuario=<%= usuario[0].idUsuario %>">Fórum</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li>
-                        <a class="nav-link" href="#">Perfil</a>
+                        <a class="nav-link" href="/alteraUsuario?idUsuario=<%= usuario[0].idUsuario %>">Perfil</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">Sair</a>
+                        <a class="nav-link" href="/">Sair</a>
                     </li>
 
                 </ul>
@@ -53,13 +53,9 @@
         <div class="row mt-5"></div>
         <div class="row mt-5">
 
-            <div class="col-2">
-                <button type="button" class="btn btn-primary"><i class="fa fa-arrow-left" aria-hidden="true">
-                    Voltar</i></button>
-            </div>
             
-            <div class="col-8 d-flex justify-content-center">
-                <h3 class="display-5"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Matemática</h3>
+            <div class="col-12 d-flex justify-content-center">
+                <h3 class="display-5"><i class="fa fa-graduation-cap" aria-hidden="true"></i> <%= cursos[0].nome %></h3>
 
             </div>
         </div>
@@ -73,118 +69,43 @@
             <div class="col-1"></div>
 
             <div class="col-10">
-                <h3 class="display-5"><i class="fa fa-commenting-o" aria-hidden="true"></i> Tópicos</h3>
+                <% if(usuario[0].tipo == "Professor") { %>
+                    <a href="/insereTopico?idUsuario=<%= usuario[0].idUsuario %>&idCurso=<%= cursos[0].idCurso %>" class="btn btn-primary">Adicionar Tópico</a>
+                <% } %>
+
+                <h3 class="display-5 mt-3"><i class="fa fa-commenting-o" aria-hidden="true"></i> Tópicos</h3>
                 <hr>
 
                 <div class="list-group mt-10">
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
+
+                    <% for(let i = 0; i<topicos.length; i++) { %>
+
+                        <div class="list-group-item list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1"><%= topicos[i].titulo %></h5>
+                                <small><%= topicos[i].dataCriacao %></small>
+                            </div>
+                            <pre class="mb-1"><%= topicos[i].descricao %></pre>
+
+                            <div class="d-flex justify-content-end">
+                                <a href="/mensagens?idUsuario=<%= usuario[0].idUsuario %>&idTopico=<%= topicos[i].idTopico %>&idCurso=<%= cursos[0].idCurso %>" class="btn btn-primary">Ver Mensagens</a>
+                          
+                                <% if(usuario[0].tipo == "Professor") { %>
+                                    
+                                    
+                                    
+                                    <a href="/alteraTopico?idUsuario=<%= usuario[0].idUsuario %>&idTopico=<%= topicos[i].idTopico %>" class="btn btn-primary mr-3 ml-3"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    <a href="/topico/excluir?idUsuario=<%= usuario[0].idUsuario %>&idTopico=<%= topicos[i].idTopico %>&idCurso=<%= cursos[0].idCurso %>" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                
+
+                                <% } %>
+                            </div>
                         </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
 
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Título Tópico</h5>
-                            <small>20/10/2020</small>
-                        </div>
-                        <p class="mb-1">Descrição do conteúdo a ser discutido no fórum.</p>
-                    </a>
+                    
 
  
-
+                    <% } %>
                     
 
                 </div>
@@ -200,7 +121,7 @@
 
 
 
-    <footer class="footer bottom text-light navbar-dark bg-primary mt-5" >
+    <footer class="footer fixed-bottom text-light navbar-dark bg-primary mt-5" >
         <div class="container mt-3">
             <div class="row">
                 <div class="col-sm-8">

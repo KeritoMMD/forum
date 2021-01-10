@@ -29,21 +29,19 @@
     <!-- Navbar-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand h1 mb-0" href="#">Fórum</a>
+            <a class="navbar-brand h1 mb-0" href="">Fórum</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li>
-                        <a class="nav-link" href="#">Perfil</a>
+                        <a class="nav-link" href="/alteraUsuario?idUsuario=<%= usuario[0].idUsuario %>">Perfil</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">Sair</a>
+                        <a class="nav-link" href="/">Sair</a>
                     </li>
 
                 </ul>
             </div>
-
-
         </div>
     </nav>
 
@@ -51,7 +49,7 @@
     <div class="container mt-5">
         <div class="row mt-5"></div>
         <div class="row mt-5">
-            <h1 class="display-5">Bem-vindo Fulano,</h1>
+            <h1 class="display-5">Bem-vindo, <%= usuario[0].nome %>!</h1>
         </div>
 
 
@@ -63,15 +61,39 @@
             <div class="col-1"></div>
 
             <div class="col-10">
-                <h3 class="display-5"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Cursos</h3>
+                
+                <% if(usuario[0].tipo == "Professor") { %>
+                    <a href="/insereCurso?idUsuario=<%= usuario[0].idUsuario %>" class="btn btn-primary">Adicionar Curso</a>
+                <% } %>
+
+                <h3 class="display-5 mt-3"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Cursos</h3>
                 <hr>
 
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">Matemática</a>
-                    <a href="#" class="list-group-item list-group-item-action">Português</a>
-                    <a href="#" class="list-group-item list-group-item-action">História</a>
-                    <a href="#" class="list-group-item list-group-item-action">Física</a>
-                    <a href="#" class="list-group-item list-group-item-action">Química</a>
+
+                <div class="card">
+                    <ul class="list-group list-group-flush d-flex">
+                        <% for(let i = 0; i<cursos.length; i++) { %>
+                            
+                            <li class="list-group-item d-flex align-items-center justify-content-between mb-1 rounded-0">
+                                <%= cursos[i].nome %>
+                                <div class="d-flex justify-content-end">
+                                    <a href="/topicos?idUsuario=<%= usuario[0].idUsuario %>&idCurso=<%= cursos[i].idCurso %>" class="btn btn-primary">Ver Tópicos</a>
+                              
+                                    <% if(usuario[0].tipo == "Professor") { %>
+                                        
+                                        
+                                        
+                                        <a href="/alteraCurso?idUsuario=<%= usuario[0].idUsuario %>&idCurso=<%= cursos[i].idCurso %>" class="btn btn-primary mr-3 ml-3"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        <a href="/curso/excluir?idUsuario=<%= usuario[0].idUsuario %>&idCurso=<%= cursos[i].idCurso %>" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    
+
+                                    <% } %>
+                                </div>
+                                
+                            </li>
+                        <% } %>
+                    </ul>
+                    
                 </div>
             </div>
 
@@ -79,7 +101,6 @@
 
 
     </div>
-
 
 
     <footer class="footer fixed-bottom text-light navbar-dark bg-primary">

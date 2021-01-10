@@ -10,7 +10,7 @@ app.set("views", "./app/views");
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.listen(port, function(){
-    console.log("Servido rodando na porta:", port);
+    console.log("Servidor rodando na porta:", port);
 });
 
 module.exports = app;

@@ -5,6 +5,6 @@ module.exports = function(){
         host: "localhost",
         user: "admin",
         password: "ifsp@1234",
-        database: "dsw"
+        database: "forum"
     });
 }

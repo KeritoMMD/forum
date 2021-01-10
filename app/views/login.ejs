@@ -57,9 +57,9 @@
                         <div class="form-group col-sm-3"></div>
 
                         <div class="form-group col-sm-6">
-                            <label for="inputUsuario">Usuário</label>
-                            <input type="text" placeholder="Digite seu usuário" class="form-control" id="inputUsuario"
-                                name="inputUsuario" value="<%= login.inputUsuario %>">
+                            <label for="prontuario">Prontuário</label>
+                            <input type="text" placeholder="Digite seu prontuário" class="form-control" id="prontuario"
+                                name="prontuario" value="<%= usuario.prontuario %>">
                         </div>
 
                     </div>
@@ -67,9 +67,9 @@
                         <div class="form-group col-sm-3"></div>
 
                         <div class="form-group col-sm-6">
-                            <label for="inputSenha">Senha</label>
-                            <input type="password" placeholder="Digite sua senha" class="form-control" id="inputSenha"
-                                name="inputSenha" value="<%= login.inputSenha %>">
+                            <label for="senha">Senha</label>
+                            <input type="password" placeholder="Digite sua senha" class="form-control" id="senha"
+                                name="senha" value="<%= usuario.senha %>">
                         </div>
 
                     </div>
@@ -85,7 +85,7 @@
                     <div class="form-row">
                         <div class="form-group col-sm-3"></div>
                         <div class="col-sm-3 mt-2">
-                            <a>Primeiro acesso</a>
+                            <a href="\insereUsuario">Primeiro acesso</a>
                         </div>
                         
 
@@ -104,6 +104,9 @@
                             </ul>
                             <% } %>
 
+                            <% if(usuario.length == 0) { %>
+                                <p class="text-danger">Usuário e/ou senha incorretos!</p>
+                            <% } %>
                         </section>
                     </div>
 
