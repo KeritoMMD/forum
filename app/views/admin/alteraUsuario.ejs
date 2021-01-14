@@ -96,8 +96,16 @@
                         <div class="form-group col-sm-5">
                             <label for="tipo">Tipo de Usuário</label>
                             <select class="form-control" id="tipo" name="tipo" value="<%= usuario[0].tipo %>">
-                                <option>Aluno</option>
-                                <option>Professor</option>
+
+                                <% if(usuario[0].tipo == "Aluno") { %>
+                                    <option selected>Aluno</option>
+                                    <option>Professor</option>
+                                <% } %>
+
+                                <% if(usuario[0].tipo == "Professor") { %>
+                                    <option>Aluno</option>
+                                    <option selected>Professor</option>
+                                <% } %>
 
                             </select>
                         </div>
